@@ -26,6 +26,7 @@ namespace rust_admintool
                 string fullPath = openFileDialog.FileName;
                 
                 fileUrlTxt.Text = fullPath;
+                txtDisplayMessage.LoadFile(fullPath, RichTextBoxStreamType.PlainText);
 
             }
             //Debugging

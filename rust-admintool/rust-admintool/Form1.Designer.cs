@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.fileUrlTxt = new System.Windows.Forms.TextBox();
-            this.loadFileBtn = new System.Windows.Forms.Button();
             this.locateFileBtn = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.txtDisplayMessage = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // fileUrlTxt
@@ -40,15 +40,6 @@
             this.fileUrlTxt.Name = "fileUrlTxt";
             this.fileUrlTxt.Size = new System.Drawing.Size(363, 20);
             this.fileUrlTxt.TabIndex = 0;
-            // 
-            // loadFileBtn
-            // 
-            this.loadFileBtn.Location = new System.Drawing.Point(24, 75);
-            this.loadFileBtn.Name = "loadFileBtn";
-            this.loadFileBtn.Size = new System.Drawing.Size(75, 23);
-            this.loadFileBtn.TabIndex = 1;
-            this.loadFileBtn.Text = "Load File";
-            this.loadFileBtn.UseVisualStyleBackColor = true;
             // 
             // locateFileBtn
             // 
@@ -64,13 +55,21 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // txtDisplayMessage
+            // 
+            this.txtDisplayMessage.Location = new System.Drawing.Point(24, 47);
+            this.txtDisplayMessage.Name = "txtDisplayMessage";
+            this.txtDisplayMessage.Size = new System.Drawing.Size(155, 136);
+            this.txtDisplayMessage.TabIndex = 3;
+            this.txtDisplayMessage.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(548, 261);
+            this.Controls.Add(this.txtDisplayMessage);
             this.Controls.Add(this.locateFileBtn);
-            this.Controls.Add(this.loadFileBtn);
             this.Controls.Add(this.fileUrlTxt);
             this.Name = "Form1";
             this.Text = "Rust Autotyper";
@@ -82,9 +81,9 @@
         #endregion
 
         private System.Windows.Forms.TextBox fileUrlTxt;
-        private System.Windows.Forms.Button loadFileBtn;
         private System.Windows.Forms.Button locateFileBtn;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.RichTextBox txtDisplayMessage;
     }
 }
 
