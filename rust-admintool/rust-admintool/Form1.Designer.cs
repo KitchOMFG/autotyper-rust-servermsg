@@ -28,22 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.fileUrlTxt = new System.Windows.Forms.TextBox();
+            this.loadFileBtn = new System.Windows.Forms.Button();
+            this.locateFileBtn = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
-            // textBox1
+            // fileUrlTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(24, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.fileUrlTxt.Location = new System.Drawing.Point(24, 21);
+            this.fileUrlTxt.Name = "fileUrlTxt";
+            this.fileUrlTxt.Size = new System.Drawing.Size(363, 20);
+            this.fileUrlTxt.TabIndex = 0;
+            // 
+            // loadFileBtn
+            // 
+            this.loadFileBtn.Location = new System.Drawing.Point(24, 75);
+            this.loadFileBtn.Name = "loadFileBtn";
+            this.loadFileBtn.Size = new System.Drawing.Size(75, 23);
+            this.loadFileBtn.TabIndex = 1;
+            this.loadFileBtn.Text = "Load File";
+            this.loadFileBtn.UseVisualStyleBackColor = true;
+            // 
+            // locateFileBtn
+            // 
+            this.locateFileBtn.Location = new System.Drawing.Point(415, 17);
+            this.locateFileBtn.Name = "locateFileBtn";
+            this.locateFileBtn.Size = new System.Drawing.Size(75, 23);
+            this.locateFileBtn.TabIndex = 2;
+            this.locateFileBtn.Text = "Locate File";
+            this.locateFileBtn.UseVisualStyleBackColor = true;
+            this.locateFileBtn.Click += new System.EventHandler(this.locateFileBtn_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(548, 261);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.locateFileBtn);
+            this.Controls.Add(this.loadFileBtn);
+            this.Controls.Add(this.fileUrlTxt);
             this.Name = "Form1";
             this.Text = "Rust Autotyper";
             this.ResumeLayout(false);
@@ -53,7 +81,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox fileUrlTxt;
+        private System.Windows.Forms.Button loadFileBtn;
+        private System.Windows.Forms.Button locateFileBtn;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 
