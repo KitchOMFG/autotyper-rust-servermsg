@@ -34,11 +34,15 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.txtDisplayMessage = new System.Windows.Forms.RichTextBox();
             this.runBtn = new System.Windows.Forms.Button();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.lineTimer = new System.Windows.Forms.Timer(this.components);
             this.stopBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.intervalSliderTxt = new System.Windows.Forms.Label();
             this.intervalSlider = new System.Windows.Forms.TrackBar();
+            this.comboCycleTime = new System.Windows.Forms.ComboBox();
+            this.repeatLabelText1 = new System.Windows.Forms.Label();
+            this.repeatLabelText2 = new System.Windows.Forms.Label();
+            this.cycleTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.intervalSlider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,9 +56,9 @@
             // 
             // locateFileBtn
             // 
-            this.locateFileBtn.Location = new System.Drawing.Point(27, 14);
+            this.locateFileBtn.Location = new System.Drawing.Point(27, 7);
             this.locateFileBtn.Name = "locateFileBtn";
-            this.locateFileBtn.Size = new System.Drawing.Size(75, 23);
+            this.locateFileBtn.Size = new System.Drawing.Size(84, 37);
             this.locateFileBtn.TabIndex = 2;
             this.locateFileBtn.Text = "Select File";
             this.locateFileBtn.UseVisualStyleBackColor = true;
@@ -62,7 +66,7 @@
             // 
             // openFileDialog
             // 
-            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             // 
             // txtDisplayMessage
             // 
@@ -75,25 +79,25 @@
             // 
             // runBtn
             // 
-            this.runBtn.Location = new System.Drawing.Point(334, 381);
+            this.runBtn.Location = new System.Drawing.Point(536, 117);
             this.runBtn.Name = "runBtn";
-            this.runBtn.Size = new System.Drawing.Size(75, 23);
+            this.runBtn.Size = new System.Drawing.Size(99, 49);
             this.runBtn.TabIndex = 4;
             this.runBtn.Text = "Run";
             this.runBtn.UseVisualStyleBackColor = true;
             this.runBtn.Click += new System.EventHandler(this.runBtn_Click);
             // 
-            // timer
+            // lineTimer
             // 
-            this.timer.Interval = 5000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.lineTimer.Interval = 5000;
+            this.lineTimer.Tick += new System.EventHandler(this.lineTimer_Tick);
             // 
             // stopBtn
             // 
             this.stopBtn.Enabled = false;
-            this.stopBtn.Location = new System.Drawing.Point(415, 381);
+            this.stopBtn.Location = new System.Drawing.Point(536, 255);
             this.stopBtn.Name = "stopBtn";
-            this.stopBtn.Size = new System.Drawing.Size(75, 23);
+            this.stopBtn.Size = new System.Drawing.Size(99, 47);
             this.stopBtn.TabIndex = 5;
             this.stopBtn.Text = "Stop";
             this.stopBtn.UseVisualStyleBackColor = true;
@@ -113,9 +117,9 @@
             this.intervalSliderTxt.AutoSize = true;
             this.intervalSliderTxt.Location = new System.Drawing.Point(16, 394);
             this.intervalSliderTxt.Name = "intervalSliderTxt";
-            this.intervalSliderTxt.Size = new System.Drawing.Size(173, 13);
+            this.intervalSliderTxt.Size = new System.Drawing.Size(179, 13);
             this.intervalSliderTxt.TabIndex = 8;
-            this.intervalSliderTxt.Text = "A message is sent every 5 seconds";
+            this.intervalSliderTxt.Text = "A line of text is sent every 5 seconds";
             // 
             // intervalSlider
             // 
@@ -127,11 +131,52 @@
             this.intervalSlider.Value = 5;
             this.intervalSlider.Scroll += new System.EventHandler(this.intervalSlider_Scroll);
             // 
+            // comboCycleTime
+            // 
+            this.comboCycleTime.FormattingEnabled = true;
+            this.comboCycleTime.Items.AddRange(new object[] {
+            "30",
+            "45",
+            "60",
+            "75",
+            "90",
+            "105",
+            "120"});
+            this.comboCycleTime.Location = new System.Drawing.Point(321, 365);
+            this.comboCycleTime.Name = "comboCycleTime";
+            this.comboCycleTime.Size = new System.Drawing.Size(121, 21);
+            this.comboCycleTime.TabIndex = 10;
+            // 
+            // repeatLabelText1
+            // 
+            this.repeatLabelText1.AutoSize = true;
+            this.repeatLabelText1.Location = new System.Drawing.Point(191, 368);
+            this.repeatLabelText1.Name = "repeatLabelText1";
+            this.repeatLabelText1.Size = new System.Drawing.Size(124, 13);
+            this.repeatLabelText1.TabIndex = 11;
+            this.repeatLabelText1.Text = "Message will cycle every";
+            // 
+            // repeatLabelText2
+            // 
+            this.repeatLabelText2.AutoSize = true;
+            this.repeatLabelText2.Location = new System.Drawing.Point(448, 368);
+            this.repeatLabelText2.Name = "repeatLabelText2";
+            this.repeatLabelText2.Size = new System.Drawing.Size(43, 13);
+            this.repeatLabelText2.TabIndex = 12;
+            this.repeatLabelText2.Text = "minutes";
+            // 
+            // cycleTimer
+            // 
+            this.cycleTimer.Tick += new System.EventHandler(this.cycleTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(503, 416);
+            this.ClientSize = new System.Drawing.Size(673, 431);
+            this.Controls.Add(this.repeatLabelText2);
+            this.Controls.Add(this.repeatLabelText1);
+            this.Controls.Add(this.comboCycleTime);
             this.Controls.Add(this.intervalSliderTxt);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.stopBtn);
@@ -155,11 +200,15 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.RichTextBox txtDisplayMessage;
         private System.Windows.Forms.Button runBtn;
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer lineTimer;
         private System.Windows.Forms.Button stopBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label intervalSliderTxt;
         private System.Windows.Forms.TrackBar intervalSlider;
+        private System.Windows.Forms.ComboBox comboCycleTime;
+        private System.Windows.Forms.Label repeatLabelText1;
+        private System.Windows.Forms.Label repeatLabelText2;
+        private System.Windows.Forms.Timer cycleTimer;
     }
 }
 

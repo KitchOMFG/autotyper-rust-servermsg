@@ -18,8 +18,6 @@ namespace rust_admintool
         public Form1()
         {
             InitializeComponent();
-            
-            
         }
 
         public void locateFileBtn_Click(object sender, EventArgs e)
@@ -30,7 +28,14 @@ namespace rust_admintool
                 string fullPath = openFileDialog.FileName;
                 fileUrlTxt.Text = fullPath;
                 StreamReader file = new StreamReader(fullPath);
-                txtDisplayMessage.LoadFile(fullPath, RichTextBoxStreamType.PlainText);
+                try
+                {
+                    txtDisplayMessage.LoadFile(fullPath, RichTextBoxStreamType.PlainText);
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("Could not open the file");
+                }
             }
         }
 
@@ -40,19 +45,25 @@ namespace rust_admintool
             stopBtn.Enabled = true;
 
             i = 0;
-            timer.Enabled = true;
+            lineTimer.Enabled = true;
+            cycleTimer.Enabled = true;
 
-
+            int cycleTime = 0;
+            bool isInt = int.TryParse(comboCycleTime.SelectedText, out cycleTime);
+            if (isInt)
+            {
+                cycleTimer.Interval = cycleTime * 60000;
+            }
         }
         private void stopBtn_Click(object sender, EventArgs e)
         {
             runBtn.Enabled = true;
             stopBtn.Enabled = false;
 
-            timer.Enabled = false;
+            lineTimer.Enabled = false;
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void lineTimer_Tick(object sender, EventArgs e)
         {
             string fullPath = openFileDialog.FileName;
             string[] lines = File.ReadAllLines(fullPath); //Splits each line into a separate array position
@@ -66,7 +77,7 @@ namespace rust_admintool
             }
             else
             {
-                timer.Enabled = false;
+                lineTimer.Enabled = false;
             }
             
             
@@ -74,9 +85,14 @@ namespace rust_admintool
 
         private void intervalSlider_Scroll(object sender, EventArgs e)
         {
-            timer.Interval = intervalSlider.Value * 1000;
+            lineTimer.Interval = intervalSlider.Value * 1000;
             int intervalValue = intervalSlider.Value;
-            intervalSliderTxt.Text = "A message is sent every " + intervalValue.ToString() + " seconds";
+            intervalSliderTxt.Text = "A line of text is sent every " + intervalValue.ToString() + " seconds";
+        }
+
+        private void cycleTimer_Tick(object sender, EventArgs e)
+        {
+            lineTimer.Enabled = true;
         }
 
         
